@@ -50,7 +50,7 @@ def trace_ratio(X, y, n_selected_features=None, mode="rank", **kwargs):
         kwargs["verbose"] = False
     verbose = kwargs["verbose"]
 
-    if style is "fisher":
+    if style == "fisher":
         kwargs_within = {"neighbor_mode": "supervised", "fisher_score": True, "y": y}
         # build within class and between class laplacian matrix L_w and L_b
         W_within = construct_W(X, **kwargs_within)
@@ -58,7 +58,7 @@ def trace_ratio(X, y, n_selected_features=None, mode="rank", **kwargs):
         L_tmp = np.eye(n_samples) - np.ones([n_samples, n_samples]) / n_samples
         L_between = L_within - L_tmp
 
-    if style is "laplacian":
+    if style == "laplacian":
         kwargs_within = {"metric": "euclidean", "neighbor_mode": "knn", "weight_mode": "heat_kernel", "k": 5, "t": 1}
         # build within class and between class laplacian matrix L_w and L_b
         W_within = construct_W(X, **kwargs_within)
@@ -94,8 +94,8 @@ def trace_ratio(X, y, n_selected_features=None, mode="rank", **kwargs):
     count = 0
     while True:
         score = np.sort(s_between - k * s_within)[::-1]
-        I = np.argsort(s_between - k * s_within)[::-1]
-        idx = I[0:n_selected_features]
+        indices = np.argsort(s_between - k * s_within)[::-1]
+        idx = indices[0:n_selected_features]
         old_k = k
         k = np.sum(s_between[idx]) / np.sum(s_within[idx])
         if verbose:
@@ -105,7 +105,7 @@ def trace_ratio(X, y, n_selected_features=None, mode="rank", **kwargs):
             break
 
     # get feature index, feature-level score and subset-level score
-    feature_idx = fs_idx[I]
+    feature_idx = fs_idx[indices]
     feature_score = score
     subset_score = k
 

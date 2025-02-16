@@ -1,6 +1,6 @@
 import numpy as np
 
-from skfeature.utility.entropy_estimators import *
+from skfeature.utility.entropy_estimators import cmidd, midd
 from skfeature.utility.util import reverse_argsort
 
 

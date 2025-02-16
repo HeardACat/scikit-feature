@@ -48,12 +48,12 @@ def udfs(X, y=None, mode="rank", **kwargs):
         # choose the k-nearest neighbors for each instance
         idx_new = idx[:, 0 : k + 1]
         H = np.eye(k + 1) - 1 / (k + 1) * np.ones((k + 1, k + 1))
-        I = np.eye(k + 1)
+        identity_kplus1 = np.eye(k + 1)
         Mi = np.zeros((n_sample, n_sample))
         for i in range(n_sample):
             Xi = Xt[:, idx_new[i, :]]
             Xi_tilde = np.dot(Xi, H)
-            Bi = np.linalg.inv(np.dot(Xi_tilde.T, Xi_tilde) + gamma * I)
+            Bi = np.linalg.inv(np.dot(Xi_tilde.T, Xi_tilde) + gamma * identity_kplus1)
             Si = np.zeros((n_sample, k + 1))
             for q in range(k + 1):
                 Si[idx_new[q], q] = 1

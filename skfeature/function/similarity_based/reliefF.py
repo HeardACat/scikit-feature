@@ -32,8 +32,8 @@ def reliefF(X, y, mode="rank", **kwargs):
 
     def feature_ranking(score):
         """
-        Rank features in descending order according to reliefF score, the higher the reliefF score, the more important the
-        feature is
+        Rank features in descending order according to reliefF score.
+        The higher the score, the more important the feature.
         """
         idx = np.argsort(score, 0)
         return idx[::-1]
@@ -92,7 +92,7 @@ def reliefF(X, y, mode="rank", **kwargs):
                     if len(near_miss[distance_sort[i][2]]) == k:
                         stop_dict[distance_sort[i][2]] = 1
             stop = True
-            for (key, value) in list(stop_dict.items()):
+            for key, value in list(stop_dict.items()):
                 if value != 1:
                     stop = False
             if stop:
@@ -104,7 +104,7 @@ def reliefF(X, y, mode="rank", **kwargs):
             near_hit_term = np.array(abs(self_fea - X[ele, :])) + np.array(near_hit_term)
 
         near_miss_term = dict()
-        for (label, miss_list) in list(near_miss.items()):
+        for label, miss_list in list(near_miss.items()):
             near_miss_term[label] = np.zeros(n_features)
             for ele in miss_list:
                 near_miss_term[label] = np.array(abs(self_fea - X[ele, :])) + np.array(near_miss_term[label])

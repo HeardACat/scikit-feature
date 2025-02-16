@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.sparse import *
+from scipy.sparse import diags
 
 from skfeature.utility.construct_W import construct_W
 from skfeature.utility.util import reverse_argsort
@@ -33,8 +33,8 @@ def lap_score(X, y=None, mode="rank", **kwargs):
 
     def feature_ranking(score):
         """
-        Rank features in ascending order according to their laplacian scores, the smaller the laplacian score is, the more
-        important the feature is
+        Rank features in ascending order according to their laplacian scores.
+        The smaller the score, the more important the feature.
         """
         idx = np.argsort(score, 0)
         return idx

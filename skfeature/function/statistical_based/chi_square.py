@@ -13,11 +13,11 @@ def chi_square(X, y, mode="rank"):
         input data
     y: {numpy array},shape (n_samples,)
         input class labels
-    mode: whether this function should return the "raw" scores, "rank" scores, 
+    mode: whether this function should return the "raw" scores, "rank" scores,
         or ordered "index".
 
-        "raw" will be the raw score if statistical. 
-        "rank" will be index ordering for compatibility with sklearn. 
+        "raw" will be the raw score if statistical.
+        "rank" will be index ordering for compatibility with sklearn.
         "index" will be the original method shown in this repository.
 
     Output

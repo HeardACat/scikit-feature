@@ -134,7 +134,7 @@ def tree_lasso_projection(v, n_features, idx, n_nodes):
         i = 1
 
     else:
-        w = v.copy()
+        w_projection = v.copy()
         i = 0
 
     # sequentially process each node

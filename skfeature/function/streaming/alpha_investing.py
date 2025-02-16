@@ -1,9 +1,6 @@
 import numpy as np
 from sklearn import linear_model
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.feature_selection import SelectorMixin
-
-from skfeature.utility.util import reverse_argsort
 
 
 def alpha_investing(X, y, w0, dw):
@@ -35,12 +32,12 @@ def alpha_investing(X, y, w0, dw):
         x_can = X[:, i]  # generate next feature
         alpha = w / 2 / (i + 1)
         X_old = X[:, F]
-        if i is 0:
+        if i == 0:
             X_old = np.ones((n_samples, 1))
             linreg_old = linear_model.LinearRegression()
             linreg_old.fit(X_old, y)
             error_old = 1 - linreg_old.score(X_old, y)
-        if i is not 0:
+        if i != 0:
             # model built with only X_old
             linreg_old = linear_model.LinearRegression()
             linreg_old.fit(X_old, y)

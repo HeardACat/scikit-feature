@@ -5,7 +5,6 @@ from numpy import linalg as LA
 
 from skfeature.utility.sparse_learning import (
     calculate_l21_norm,
-    construct_label_matrix,
     construct_label_matrix_pan,
     feature_ranking,
     generate_diagonal_matrix,

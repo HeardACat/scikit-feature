@@ -5,14 +5,13 @@ from skfeature.utility.util import reverse_argsort
 
 def t_score(X, y, mode="rank"):
     """
-    This function calculates t_score for each feature, where t_score is only used for binary problem
-    t_score = |mean1-mean2|/sqrt(((std1^2)/n1)+((std2^2)/n2)))
+    This function implements the t_score feature selection
 
     Input
     -----
     X: {numpy array}, shape (n_samples, n_features)
         input data
-    y: {numpy array}, shape (n_samples,)
+    y: {numpy array},shape (n_samples,)
         input class labels
 
     Output
@@ -23,37 +22,37 @@ def t_score(X, y, mode="rank"):
 
     def feature_ranking(F):
         """
-        Rank features in descending order according to t-score, the higher the t-score, the more important the feature is
+        Rank features according to t-score
+        The higher the t-score, the more important the feature
         """
         idx = np.argsort(F)
         return idx[::-1]
 
+    # Divide the data into positive and negative examples
     n_samples, n_features = X.shape
+    # Calculate t-score for each feature
     F = np.zeros(n_features)
-    c = np.unique(y)
-    if len(c) == 2:
-        for i in range(n_features):
-            f = X[:, i]
-            # class0 contains instances belonging to the first class
-            # class1 contains instances belonging to the second class
-            class0 = f[y == c[0]]
-            class1 = f[y == c[1]]
-            mean0 = np.mean(class0)
-            mean1 = np.mean(class1)
-            std0 = np.std(class0)
-            std1 = np.std(class1)
-            n0 = len(class0)
-            n1 = len(class1)
-            t = mean0 - mean1
-            t0 = np.true_divide(std0 ** 2, n0)
-            t1 = np.true_divide(std1 ** 2, n1)
-            F[i] = np.true_divide(t, (t0 + t1) ** 0.5)
+    for i in range(n_features):
+        f = X[:, i]
+        # class0 contains the indices of negative class
+        # class1 contains the indices of positive class
+        class0 = [j for j in range(n_samples) if y[j] == 0]
+        class1 = [j for j in range(n_samples) if y[j] == 1]
+        # mean0 contains the mean of negative class
+        mean0 = np.mean(f[class0])
+        # mean1 contains the mean of positive class
+        mean1 = np.mean(f[class1])
+        # std1 contains the standard deviation of negative class
+        std0 = np.std(f[class0])
+        # std1 contains the standard deviation of positive class
+        std1 = np.std(f[class1])
+        # t-score for the i-th feature
+        t_score = (mean0 - mean1) / np.sqrt(np.square(std0) / len(class0) + np.square(std1) / len(class1))
+        F[i] = np.abs(t_score)
+
+    if mode == "raw":
+        return np.array(F)
+    elif mode == "index":
+        return feature_ranking(F)
     else:
-        print("y should be guaranteed to a binary class vector")
-        exit(0)
-    if mode == "index":
-        return np.array(np.abs(F))
-    elif mode == "feature_ranking":
-        return feature_ranking(np.array(np.abs(F)))
-    else:
-        return reverse_argsort(feature_ranking(np.array(np.abs(F))), X.shape[1])
+        return reverse_argsort(feature_ranking(F))

@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.stats import rankdata
 
 from skfeature.utility.mutual_information import su_calculation
 from skfeature.utility.util import reverse_argsort

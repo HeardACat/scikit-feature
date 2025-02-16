@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.sparse import *
+from scipy.sparse import csc_matrix, lil_matrix
 from sklearn.metrics.pairwise import pairwise_distances
 
 
@@ -46,9 +46,12 @@ def construct_W(X, **kwargs):
             indicates whether to build the affinity matrix in a fisher score way, in which W_ij = 1/n_l if yi = yj = l;
             otherwise W_ij = 0 (default fisher_score = false)
         reliefF: {boolean}
-            indicates whether to build the affinity matrix in a reliefF way, NH(x) and NM(x,y) denotes a set of
+            indicates whether to build the affinity matrix in a reliefF way. NH(x) and NM(x,y) denotes a set of
             k nearest points to x with the same class as x, and a different class (the class y), respectively.
-            W_ij = 1 if i = j; W_ij = 1/k if x_j \in NH(x_i); W_ij = -1/(c-1)k if x_j \in NM(x_i, y) (default reliefF = false)
+            W_ij = 1 if i = j
+            W_ij = 1/k if x_j in NH(x_i)
+            W_ij = -1/(c-1)k if x_j in NM(x_i, y)
+            (default reliefF = false)
 
     Output
     ------

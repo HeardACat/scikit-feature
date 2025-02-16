@@ -57,7 +57,14 @@ def evaluation(X_selected, n_clusters, y):
         Accuracy
     """
     k_means = KMeans(
-        n_clusters=n_clusters, n_init=10, max_iter=300, tol=0.0001, verbose=0, random_state=None, copy_x=True, n_jobs=1,
+        n_clusters=n_clusters,
+        n_init=10,
+        max_iter=300,
+        tol=0.0001,
+        verbose=0,
+        random_state=None,
+        copy_x=True,
+        n_jobs=1,
     )
 
     k_means.fit(X_selected)

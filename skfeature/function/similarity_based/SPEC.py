@@ -2,7 +2,7 @@ import numpy as np
 import numpy.matlib
 import pandas as pd
 from numpy import linalg as LA
-from scipy.sparse import *
+from scipy.sparse import csc_matrix
 from sklearn.metrics.pairwise import rbf_kernel
 
 from skfeature.utility.util import reverse_argsort
@@ -11,7 +11,7 @@ from skfeature.utility.util import reverse_argsort
 def similiarity_classification(X, y):
     """
     Calculates similarity based on labels using X (data) y (labels)
-    
+
     note that it only considers the labels
     """
     y_series = pd.Series(y)
@@ -28,15 +28,15 @@ def similiarity_classification(X, y):
 def similarity_regression(X, y, n_neighbors=None):
     """
     Calculates similarity based on labels using X (data) y (labels)
-    
+
     this considers X, by use knn first and then a distance metric - in this setting
-    we will use the rbf kernel for similarity. 
-    
+    we will use the rbf kernel for similarity.
+
     Then if X is "far" in the knn sense we will set to 0
     we can determine "distance" based on clusters? that is if we build
-    a cluster around this obs, which other observations are closest. 
-    
-    
+    a cluster around this obs, which other observations are closest.
+
+
     """
     from sklearn.neighbors import NearestNeighbors
 
@@ -80,11 +80,13 @@ def spec(X, y=None, mode="rank", **kwargs):
             kwargs["style"] = 0
         style = kwargs["style"]
 
-        # if style = -1 or 0, ranking features in descending order, the higher the score, the more important the feature is
+        # if style = -1 or 0, ranking features in descending order
+        # the higher the score, the more important the feature is
         if style == -1 or style == 0:
             idx = np.argsort(score, 0)
             return idx[::-1]
-        # if style != -1 and 0, ranking features in ascending order, the lower the score, the more important the feature is
+        # if style != -1 and 0, ranking features in ascending order
+        # the lower the score, the more important the feature is
         elif style != -1 and style != 0:
             idx = np.argsort(score, 0)
             return idx
@@ -137,12 +139,12 @@ def spec(X, y=None, mode="rank", **kwargs):
     for i in range(n_features):
         f = X[:, i]
         F_hat = np.dot(np.diag(d2[:, 0]), f)
-        l = LA.norm(F_hat)
-        if l < 100 * np.spacing(1):
+        norm_f_hat = LA.norm(F_hat)
+        if norm_f_hat < 100 * np.spacing(1):
             w_fea[i] = 1000
             continue
         else:
-            F_hat = F_hat / l
+            F_hat = F_hat / norm_f_hat
         a = np.array(np.dot(np.transpose(F_hat), U))
         a = np.multiply(a, a)
         a = np.transpose(a)

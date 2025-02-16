@@ -49,8 +49,8 @@ def mi(x, y, k=3, base=2):
 
 def cmi(x, y, z, k=3, base=2):
     """
-    Mutual information of x and y, conditioned on z; x, y, z should be a list of vectors, e.g. x = [[1.3],[3.7],[5.1],[2.4]]
-    if x is a one-dimensional scalar and we have four samples
+    Mutual information of x and y, conditioned on z.
+    Input vectors should be lists, e.g. x = [[1.3],[3.7],[5.1],[2.4]]
     """
 
     assert len(x) == len(y), "Lists should have same length"
@@ -69,8 +69,8 @@ def cmi(x, y, z, k=3, base=2):
 
 def kldiv(x, xp, k=3, base=2):
     """
-    KL Divergence between p and q for x~p(x), xp~q(x); x, xp should be a list of vectors, e.g. x = [[1.3],[3.7],[5.1],[2.4]]
-    if x is a one-dimensional scalar and we have four samples
+    KL Divergence between p and q for x~p(x), xp~q(x).
+    Input vectors should be lists, e.g. x = [[1.3],[3.7],[5.1],[2.4]]
     """
 
     assert k <= len(x) - 1, "Set k smaller than num. samples - 1"
@@ -135,8 +135,7 @@ def elog(x):
 
 # Mixed estimators
 def micd(x, y, k=3, base=2, warning=True):
-    """ If x is continuous and y is discrete, compute mutual information
-    """
+    """If x is continuous and y is discrete, compute mutual information"""
 
     overallentropy = entropy(x, k, base)
     n = len(y)
@@ -152,11 +151,9 @@ def micd(x, y, k=3, base=2, warning=True):
             mi -= word_dict[yval] * entropy(xgiveny, k, base)
         else:
             if warning:
-                print(
-                    "Warning, after conditioning, on y={0} insufficient data. Assuming maximal entropy in this case.".format(
-                        yval
-                    )
-                )
+                msg = "Warning, after conditioning, on y={0} insufficient data. ".format(yval)
+                msg += "Assuming maximal entropy in this case."
+                print(msg)
             mi -= word_dict[yval] * overallentropy
     return mi  # units already applied
 

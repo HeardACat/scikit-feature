@@ -1,5 +1,4 @@
 import math
-import sys
 
 import numpy as np
 import sklearn.cluster
@@ -14,7 +13,7 @@ def ndfs(X, y=None, mode="rank", **kwargs):
     This function implement unsupervised feature selection using nonnegative spectral analysis, i.e.,
     min_{F,W} Tr(F^T L F) + alpha*(||XW-F||_F^2 + beta*||W||_{2,1}) + gamma/2 * ||F^T F - I||_F^2
     s.t. F >= 0
-    
+
     Input
     -----
     X: {numpy array}, shape (n_samples, n_features)
@@ -39,8 +38,8 @@ def ndfs(X, y=None, mode="rank", **kwargs):
     ------
     W: {numpy array}, shape(n_features, n_clusters)
         feature weight matrix
-        
-    Reference: 
+
+    Reference:
         Li, Zechao, et al. "Unsupervised Feature Selection Using Nonnegative Spectral Analysis." AAAI. 2012.
     """
 
@@ -131,7 +130,7 @@ def ndfs(X, y=None, mode="rank", **kwargs):
 
     # initialize D as identity matrix
     D = np.identity(n_features)
-    I = np.identity(n_samples)
+    identity_matrix = np.identity(n_samples)
 
     # build laplacian matrix
     L = np.array(W.sum(1))[:, 0] - W
@@ -148,7 +147,7 @@ def ndfs(X, y=None, mode="rank", **kwargs):
         temp = 0.5 / temp
         D = np.diag(temp)
         # update M
-        M = L + alpha * (I - np.dot(np.dot(X, T), X.transpose()))
+        M = L + alpha * (identity_matrix - np.dot(np.dot(X, T), X.transpose()))
         M = (M + M.transpose()) / 2
         # update F
         denominator = np.dot(M, F) + gamma * np.dot(np.dot(F, F.transpose()), F)

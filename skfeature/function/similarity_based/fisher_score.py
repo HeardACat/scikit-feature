@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.sparse import *
+from scipy.sparse import diags
 
 from skfeature.utility.construct_W import construct_W
 from skfeature.utility.util import reverse_argsort
