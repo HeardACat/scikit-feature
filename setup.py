@@ -17,7 +17,7 @@ from setuptools import setup
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 
-NAME = "skfeature-chappers"
+NAME = "skfeature-gli"
 
 DESCRIPTION = "Unofficial Fork of Feature Selection Repository in Python (DMML Lab@ASU)"
 
@@ -27,13 +27,13 @@ AUTHOR = "Jundong Li, Kewei Cheng, Suhang Wang"
 
 AUTHOR_EMAIL = "jundong.li@asu.edu, kcheng18@asu.edu, suhang.wang@asu.edu"
 
-MAINTAINER = "Chapman Siu"
+MAINTAINER = "Guangyu Li"
 
-MAINTAINER_EMAIL = "chpmn.siu@gmail.com"
+MAINTAINER_EMAIL = "gl343@cornell.edu"
 
-URL = "https://github.com/chappers/scikit-feature"
+URL = "https://github.com/lguangyu/scikit-feature"
 
-VERSION = "1.1.0"
+VERSION = "1.1.2"
 
 REQUIRED = [
     "scikit-learn",
@@ -57,6 +57,8 @@ setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
+	long_description=open("README.md", "r").read(),
+	long_description_content_type="text/markdown",
     keywords=KEYWORDS,
     author=AUTHOR,
     install_requires=REQUIRED,
