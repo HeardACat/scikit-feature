@@ -42,7 +42,7 @@ def generate_diagonal_matrix(U):
 
 def calculate_l21_norm(X):
     """
-    This function calculates the l21 norm of a matrix X, i.e., \sum ||X[i,:]||_2
+    This function calculates the l21 norm of a matrix X, i.e., sum ||X[i,:]||_2
 
     Input:
     -----
@@ -116,7 +116,7 @@ def euclidean_projection(V, n_features, n_classes, z, gamma):
 
 def tree_lasso_projection(v, n_features, idx, n_nodes):
     """
-    This functions solves the following optimization problem min_w 1/2 ||w-v||_2^2 + \sum z_i||w_{G_{i}}||
+    This functions solves the following optimization problem min_w 1/2 ||w-v||_2^2 + sum z_i||w_{G_{i}}||
     where w and v are of dimensions of n_features; z_i >=0, and G_{i} follows the tree structure
     """
     # test whether the first node is special
@@ -161,7 +161,7 @@ def tree_lasso_projection(v, n_features, idx, n_nodes):
 
 def tree_norm(w, n_features, idx, n_nodes):
     """
-    This function computes \sum z_i||w_{G_{i}}||
+    This function computes sum z_i||w_{G_{i}}||
     """
     obj = 0
     # test whether the first node is special
