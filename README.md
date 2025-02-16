@@ -7,8 +7,7 @@ This is may or may not be a temporary fork of the original repository as develop
 
 **Forked project information**
 
-*  Project site - https://github.com/lguangyu/scikit-feature
-*  Project site - https://github.com/chappers/scikit-feature
+*  Project site - https://github.com/HeardACat/scikit-feature
 
 **Original `scikit-feature` project information**
 
