@@ -1,20 +1,17 @@
-import unittest
-
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import ll_l21
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_ll_l21():
     # load data
     from functools import partial
 
-    mat = scipy.io.loadmat("./data/COIL20.mat")
+    mat = loadmat("./data/COIL20.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label

@@ -1,18 +1,15 @@
-import unittest
-
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.information_theoretical_based import CIFE
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_cife():
     # load data
-    mat = scipy.io.loadmat("./data/colon.mat")
+    mat = loadmat("./data/colon.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label

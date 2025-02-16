@@ -1,20 +1,17 @@
-import unittest
-
 import numpy as np
-import scipy.io
 from sklearn.feature_selection import SelectKBest
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import MCFS
 from skfeature.utility import construct_W, unsupervised_evaluation
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_mcfs():
     # load data
     from functools import partial
 
-    mat = scipy.io.loadmat("./data/COIL20.mat")
+    mat = loadmat("./data/COIL20.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label
@@ -25,9 +22,9 @@ def test_mcfs():
     W = construct_W.construct_W(X, **kwargs)
 
     num_fea = 100  # specify the number of selected features
-    # specify the number of clusters, it is usually set as the number of classes in the ground truth, 
+    # specify the number of clusters, it is usually set as the number of classes in the ground truth,
     # we will limit it to run the tests quicker
-    num_cluster = 5  
+    num_cluster = 5
 
     pipeline = []
     mcfs_partial = partial(MCFS.mcfs, W=W, n_clusters=num_cluster)

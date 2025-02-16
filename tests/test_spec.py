@@ -1,7 +1,6 @@
 from functools import partial
 
 import numpy as np
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score
@@ -9,11 +8,12 @@ from sklearn.pipeline import Pipeline
 
 from skfeature.function.similarity_based import SPEC
 from skfeature.utility import unsupervised_evaluation
+from skfeature.utility.util import loadmat
 
 
 def test_spec():
     # load data
-    mat = scipy.io.loadmat("./skfeature/data/COIL20.mat")
+    mat = loadmat("./data/COIL20.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label

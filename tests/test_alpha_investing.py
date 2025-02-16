@@ -1,17 +1,14 @@
-import unittest
-
-import scipy.io
 from sklearn import svm
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.streaming import alpha_investing
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_alphainvesting():
     # load data
-    mat = scipy.io.loadmat("./data/COIL20.mat")
+    mat = loadmat("./data/COIL20.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label

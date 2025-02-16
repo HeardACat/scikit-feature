@@ -1,18 +1,15 @@
-import unittest
-
 import numpy as np
-import scipy.io
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.statistical_based import low_variance
 from skfeature.utility import unsupervised_evaluation
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_low_variance():
     # load data
 
-    mat = scipy.io.loadmat("./data/BASEHOCK.mat")
+    mat = loadmat("./data/BASEHOCK.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label

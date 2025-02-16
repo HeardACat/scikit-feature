@@ -1,20 +1,17 @@
-import unittest
-
 import numpy as np
-import scipy.io
 from sklearn.feature_selection import SelectKBest
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.similarity_based import lap_score
 from skfeature.utility import construct_W, unsupervised_evaluation
+from skfeature.utility.util import loadmat
 
 
-@unittest.skip("temporarily disabled")
 def test_lap_score():
     # load data
     from functools import partial
 
-    mat = scipy.io.loadmat("./data/COIL20.mat")
+    mat = loadmat("./data/COIL20.mat")
     X = mat["X"]  # data
     X = X.astype(float)
     y = mat["Y"]  # label
