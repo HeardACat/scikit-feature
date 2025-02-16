@@ -17,7 +17,7 @@ from setuptools import setup
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 
-NAME = "skfeature-gli"
+NAME = "skfeature-chappers"
 
 DESCRIPTION = "Unofficial Fork of Feature Selection Repository in Python (DMML Lab@ASU)"
 
