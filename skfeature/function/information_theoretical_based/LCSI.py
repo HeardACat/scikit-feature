@@ -111,4 +111,4 @@ def lcsi(X, y, mode="rank", **kwargs):
     if mode == "index":
         return np.array(F)
     else:
-        return reverse_argsort(F)
+        return reverse_argsort(F), np.array(J_LCSI), np.array(MIfy)

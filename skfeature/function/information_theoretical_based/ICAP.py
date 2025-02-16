@@ -4,10 +4,11 @@ from skfeature.utility.entropy_estimators import cmidd, midd
 from skfeature.utility.util import reverse_argsort
 
 
-def icap(X, y, mode="rank", **kwargs):
+def icap(X, y, **kwargs):
     """
     This function implements the ICAP feature selection.
-    The scoring criteria is calculated based on the formula j_icap=I(f;y)-max_j(I(fj;f)-I(fj;f|y))
+    When used with SelectKBest, it returns scores and None for p-values.
+    When used directly with mode parameter, it returns additional information.
 
     Input
     -----
@@ -16,25 +17,47 @@ def icap(X, y, mode="rank", **kwargs):
     y: {numpy array}, shape (n_samples,)
         input class labels
     kwargs: {dictionary}
+        mode: {"rank", "index", None}, default="rank"
+            If None, return scores and None for p-values (used with SelectKBest)
+            If "rank" or "index", return additional information
         n_selected_features: {int}
             number of features to select
 
     Output
     ------
-    F: {numpy array}, shape (n_features,)
-        index of selected features, F[0] is the most important feature
-    J_ICAP: {numpy array}, shape: (n_features,)
-        corresponding objective function value of selected features
-    MIfy: {numpy array}, shape: (n_features,)
-        corresponding mutual information between selected features and response
+    When mode is None (used with SelectKBest):
+        scores: {numpy array}, shape (n_features,)
+            scores for each feature
+        p_values: None
+            
+    When mode is specified:
+        F: {numpy array}, shape (n_features,)
+            index of selected features, F[0] is the most important feature
+        J_ICAP: {numpy array}, shape: (n_features,)
+            corresponding objective function value of selected features
+        MIfy: {numpy array}, shape: (n_features,)
+            corresponding mutual information between selected features and response
 
     Reference
     ---------
     For more details, please refer to the following paper: "Feature Selection Based on Mutual Information: Criteria of Max-Dependency,
     Max-Relevance, and Min-Redundancy" IEEE TPAMI 2005
     """
-
     n_samples, n_features = X.shape
+
+    # Calculate mutual information between each feature and the response
+    scores = np.zeros(n_features)
+    for i in range(n_features):
+        f = X[:, i]
+        scores[i] = midd(f, y)
+
+    # If called from SelectKBest, return scores and None for p-values
+    if 'mode' not in kwargs:
+        return scores, None
+
+    # For other modes, continue with the original algorithm
+    mode = kwargs.get('mode', 'rank')
+    
     # index of selected features, initialized to be empty
     F = []
     # Objective function value for selected features
@@ -97,7 +120,15 @@ def icap(X, y, mode="rank", **kwargs):
         MIfy.append(t1[idx])
         f_select = X[:, idx]
 
-    if mode == "index":
+    mode = kwargs.get('mode', 'rank')
+    if mode is None:
+        # When used with SelectKBest, return scores and None for p-values
+        # Convert J_ICAP to a proper score array
+        scores = np.zeros(n_features)
+        for i, idx in enumerate(F):
+            scores[idx] = J_ICAP[i]
+        return scores, None
+    elif mode == "index":
         return np.array(F)
     else:
-        return reverse_argsort(F)
+        return reverse_argsort(F), np.array(J_ICAP), np.array(MIfy)
