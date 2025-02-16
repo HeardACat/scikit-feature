@@ -1,5 +1,4 @@
 import numpy as np
-import numpy.matlib
 import pandas as pd
 from numpy import linalg as LA
 from scipy.sparse import csc_matrix
@@ -35,8 +34,6 @@ def similarity_regression(X, y, n_neighbors=None):
     Then if X is "far" in the knn sense we will set to 0
     we can determine "distance" based on clusters? that is if we build
     a cluster around this obs, which other observations are closest.
-
-
     """
     from sklearn.neighbors import NearestNeighbors
 
@@ -106,27 +103,28 @@ def spec(X, y=None, mode="rank", **kwargs):
 
     style = kwargs["style"]
     W = kwargs["W"]
-    if type(W) is numpy.ndarray:
+    if isinstance(W, np.ndarray):
         W = csc_matrix(W)
 
     n_samples, n_features = X.shape
 
     # build the degree matrix
-    X_sum = np.array(W.sum(axis=1))
+    X_sum = np.array(W.sum(axis=1)).flatten()
     D = np.zeros((n_samples, n_samples))
-    for i in range(n_samples):
-        D[i, i] = X_sum[i]
+    np.fill_diagonal(D, X_sum)  # Use fill_diagonal instead of direct assignment
 
     # build the laplacian matrix
     L = D - W
-    d1 = np.power(np.array(W.sum(axis=1)), -0.5)
+    d1 = np.power(np.array(W.sum(axis=1)), -0.5).flatten()
     d1[np.isinf(d1)] = 0
-    d2 = np.power(np.array(W.sum(axis=1)), 0.5)
-    v = np.dot(np.diag(d2[:, 0]), np.ones(n_samples))
+    d2 = np.power(np.array(W.sum(axis=1)), 0.5).flatten()
+    v = np.dot(np.diag(d2), np.ones(n_samples))
     v = v / LA.norm(v)
 
     # build the normalized laplacian matrix
-    L_hat = (np.matlib.repmat(d1, 1, n_samples)) * np.array(L) * np.matlib.repmat(np.transpose(d1), n_samples, 1)
+    # Replace numpy.matlib.repmat with numpy broadcasting
+    d1_matrix = d1[:, np.newaxis]
+    L_hat = (d1_matrix * np.array(L)) * d1[np.newaxis, :]
 
     # calculate and construct spectral information
     s, U = np.linalg.eigh(L_hat)
@@ -138,7 +136,7 @@ def spec(X, y=None, mode="rank", **kwargs):
 
     for i in range(n_features):
         f = X[:, i]
-        F_hat = np.dot(np.diag(d2[:, 0]), f)
+        F_hat = np.dot(np.diag(d2), f)
         norm_f_hat = LA.norm(F_hat)
         if norm_f_hat < 100 * np.spacing(1):
             w_fea[i] = 1000

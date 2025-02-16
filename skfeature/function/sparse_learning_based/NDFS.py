@@ -67,11 +67,9 @@ def ndfs(X, y=None, mode="rank", **kwargs):
             n_init=10,
             max_iter=300,
             tol=0.0001,
-            precompute_distances=True,
             verbose=0,
             random_state=None,
             copy_x=True,
-            n_jobs=1,
         )
         kmeans.fit(X)
         labels = kmeans.labels_

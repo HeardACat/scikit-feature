@@ -27,7 +27,8 @@ def cife(X, y, mode="rank", **kwargs):
 
     Reference
     ---------
-    Brown, Gavin et al. "Conditional Likelihood Maximisation: A Unifying Framework for Information Theoretic Feature Selection." JMLR 2012.
+    Brown, Gavin et al. "Conditional Likelihood Maximisation: A Unifying Framework for Information
+    Theoretic Feature Selection." JMLR 2012.
     """
 
     if "n_selected_features" in list(kwargs.keys()):

@@ -8,8 +8,8 @@ from skfeature.utility.sparse_learning import tree_lasso_projection, tree_norm
 def tree_fs(X, y, z, idx, **kwargs):
     """
     This function implements tree structured group lasso regularization with least square loss, i.e.,
-    min_{w} ||Xw-Y||_2^2 + z\sum_{i}\sum_{j} h_{j}^{i}|||w_{G_{j}^{i}}|| where h_{j}^{i} is the weight for the j-th group
-    from the i-th level (the root node is in level 0)
+    min_{w} ||Xw-Y||_2^2 + z\sum_{i}\sum_{j} h_{j}^{i}|||w_{G_{j}^{i}}|| where h_{j}^{i} is the weight for
+    the j-th group from the i-th level (the root node is in level 0)
 
     Input
     -----
@@ -44,7 +44,8 @@ def tree_fs(X, y, z, idx, **kwargs):
 
     Reference:
         Liu, Jun, et al. "Moreau-Yosida Regularization for Grouped Tree Structure Learning." NIPS. 2010.
-        Liu, Jun, et al. "SLEP: Sparse Learning with Efficient Projections." http://www.public.asu.edu/~jye02/Software/SLEP, 2009.
+        Liu, Jun, et al. "SLEP: Sparse Learning with Efficient Projections."
+        http://www.public.asu.edu/~jye02/Software/SLEP, 2009.
     """
 
     if "verbose" not in kwargs:

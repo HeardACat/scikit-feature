@@ -27,7 +27,8 @@ def fcbf(X, y, mode="rank", **kwargs):
 
     Reference
     ---------
-        Yu, Lei and Liu, Huan. "Feature Selection for High-Dimensional Data: A Fast Correlation-Based Filter Solution." ICML 2003.
+        Yu, Lei and Liu, Huan. "Feature Selection for High-Dimensional Data: A Fast Correlation-Based Filter
+        Solution." ICML 2003.
     """
 
     n_samples, n_features = X.shape

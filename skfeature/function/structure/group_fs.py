@@ -41,7 +41,8 @@ def group_fs(X, y, z1, z2, idx, **kwargs):
     Reference
     ---------
         Liu, Jun, et al. "Moreau-Yosida Regularization for Grouped Tree Structure Learning." NIPS. 2010.
-        Liu, Jun, et al. "SLEP: Sparse Learning with Efficient Projections." http://www.public.asu.edu/~jye02/Software/SLEP, 2009.
+        Liu, Jun, et al. "SLEP: Sparse Learning with Efficient Projections."
+        http://www.public.asu.edu/~jye02/Software/SLEP, 2009.
     """
     if "verbose" not in kwargs:
         verbose = False

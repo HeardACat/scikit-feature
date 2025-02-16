@@ -1,6 +1,8 @@
 import random
+from pathlib import Path
 
 import numpy as np
+import scipy.io
 from scipy.stats import rankdata
 
 
@@ -43,3 +45,7 @@ def reverse_argsort(X, size=None):
         X_unseen_shuffle = random.sample(X_unseen[:], len(X_unseen))
         X_obj = X_raw + X_unseen_shuffle
         return reverse_argsort(X_obj[:])
+
+
+def loadmat(path_to_mat):
+    return scipy.io.loadmat(Path(__file__).parent.parent.joinpath(f"{path_to_mat}"))

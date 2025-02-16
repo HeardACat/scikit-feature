@@ -29,7 +29,7 @@ def icap(X, y, **kwargs):
         scores: {numpy array}, shape (n_features,)
             scores for each feature
         p_values: None
-            
+
     When mode is specified:
         F: {numpy array}, shape (n_features,)
             index of selected features, F[0] is the most important feature
@@ -40,8 +40,8 @@ def icap(X, y, **kwargs):
 
     Reference
     ---------
-    For more details, please refer to the following paper: "Feature Selection Based on Mutual Information: Criteria of Max-Dependency,
-    Max-Relevance, and Min-Redundancy" IEEE TPAMI 2005
+    For more details, please refer to the following paper: "Feature Selection Based on Mutual Information:
+    Criteria of Max-Dependency, Max-Relevance, and Min-Redundancy" IEEE TPAMI 2005
     """
     n_samples, n_features = X.shape
 
@@ -52,12 +52,12 @@ def icap(X, y, **kwargs):
         scores[i] = midd(f, y)
 
     # If called from SelectKBest, return scores and None for p-values
-    if 'mode' not in kwargs:
+    if "mode" not in kwargs:
         return scores, None
 
     # For other modes, continue with the original algorithm
-    mode = kwargs.get('mode', 'rank')
-    
+    mode = kwargs.get("mode", "rank")
+
     # index of selected features, initialized to be empty
     F = []
     # Objective function value for selected features
@@ -120,7 +120,7 @@ def icap(X, y, **kwargs):
         MIfy.append(t1[idx])
         f_select = X[:, idx]
 
-    mode = kwargs.get('mode', 'rank')
+    mode = kwargs.get("mode", "rank")
     if mode is None:
         # When used with SelectKBest, return scores and None for p-values
         # Convert J_ICAP to a proper score array
