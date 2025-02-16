@@ -25,6 +25,7 @@ Installation
 # From pip
 
 ```sh
-pip install skfeature-gli
+pip install skfeature-chappers
+
 ```
 
