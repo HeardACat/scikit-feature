@@ -27,13 +27,13 @@ AUTHOR = "Jundong Li, Kewei Cheng, Suhang Wang"
 
 AUTHOR_EMAIL = "jundong.li@asu.edu, kcheng18@asu.edu, suhang.wang@asu.edu"
 
-MAINTAINER = "Guangyu Li"
+MAINTAINER = "HeardACat"
 
-MAINTAINER_EMAIL = "gl343@cornell.edu"
+MAINTAINER_EMAIL = ""
 
-URL = "https://github.com/lguangyu/scikit-feature"
+URL = "https://github.com/HeardACat/scikit-feature"
 
-VERSION = "1.1.2"
+VERSION = "1.1.3"
 
 REQUIRED = [
     "scikit-learn",
