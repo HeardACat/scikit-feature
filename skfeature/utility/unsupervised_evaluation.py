@@ -63,8 +63,7 @@ def evaluation(X_selected, n_clusters, y):
         tol=0.0001,
         verbose=0,
         random_state=None,
-        copy_x=True,
-        n_jobs=1,
+        copy_x=True
     )
 
     k_means.fit(X_selected)
