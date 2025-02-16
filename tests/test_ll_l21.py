@@ -7,7 +7,6 @@ from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import ll_l21
-from skfeature.utility.sparse_learning import construct_label_matrix_pan
 
 
 @unittest.skip("temporarily disabled")
@@ -20,7 +19,6 @@ def test_ll_l21():
     X = X.astype(float)
     y = mat["Y"]  # label
     y = y[:, 0]
-    Y = construct_label_matrix_pan(y)
     n_samples, n_features = X.shape  # number of samples and number of features
 
     # perform evaluation on classification task

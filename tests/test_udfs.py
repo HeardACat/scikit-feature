@@ -8,7 +8,6 @@ from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import UDFS
 from skfeature.utility import unsupervised_evaluation
-from skfeature.utility.sparse_learning import feature_ranking
 
 
 @unittest.skip("temporarily disabled")

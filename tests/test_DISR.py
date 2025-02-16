@@ -1,4 +1,3 @@
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score
@@ -30,4 +29,4 @@ def test_disr():
 
 
 if __name__ == "__main__":
-    main()
+    test_disr()

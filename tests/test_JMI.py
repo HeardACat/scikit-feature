@@ -1,4 +1,3 @@
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score

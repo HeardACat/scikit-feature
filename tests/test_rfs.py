@@ -1,11 +1,9 @@
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import RFS
-from skfeature.utility.sparse_learning import construct_label_matrix, feature_ranking
 
 
 def test_rfs():

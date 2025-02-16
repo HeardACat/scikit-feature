@@ -11,7 +11,6 @@ from skfeature.utility import unsupervised_evaluation
 @unittest.skip("temporarily disabled")
 def test_low_variance():
     # load data
-    from functools import partial
 
     mat = scipy.io.loadmat("./data/BASEHOCK.mat")
     X = mat["X"]  # data

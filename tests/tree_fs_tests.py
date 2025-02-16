@@ -20,7 +20,8 @@ def main():
     y = np.dot(X, w_orin) + 0.01 * noise
     y = y[:, 0]
 
-    z = 0.01  # specify the regularization parameter of regularization parameter of L2 norm for the non-overlapping group
+    # specify the regularization parameter of regularization parameter of L2 norm for the non-overlapping group
+    z = 0.01  
 
     # specify the tree structure among features
     idx = np.array(

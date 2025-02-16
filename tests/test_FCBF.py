@@ -1,7 +1,5 @@
-import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 

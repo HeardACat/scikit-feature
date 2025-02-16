@@ -7,7 +7,6 @@ from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.sparse_learning_based import ls_l21
-from skfeature.utility.sparse_learning import *
 
 
 @unittest.skip("temporarily disabled")

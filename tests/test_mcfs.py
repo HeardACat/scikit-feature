@@ -25,7 +25,9 @@ def test_mcfs():
     W = construct_W.construct_W(X, **kwargs)
 
     num_fea = 100  # specify the number of selected features
-    num_cluster = 5  # specify the number of clusters, it is usually set as the number of classes in the ground truth, we will limit it to run the tests quicker
+    # specify the number of clusters, it is usually set as the number of classes in the ground truth, 
+    # we will limit it to run the tests quicker
+    num_cluster = 5  
 
     pipeline = []
     mcfs_partial = partial(MCFS.mcfs, W=W, n_clusters=num_cluster)

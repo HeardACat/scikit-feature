@@ -3,12 +3,10 @@ import unittest
 import scipy.io
 from sklearn import svm
 from sklearn.feature_selection import SelectKBest
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 
 from skfeature.function.information_theoretical_based import CMIM
-from skfeature.function.statistical_based import CFS
 
 
 @unittest.skip("temporarily disabled")
